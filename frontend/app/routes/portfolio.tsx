@@ -1,7 +1,7 @@
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/portfolio";
 import { content_ru } from "../constants/content_ru";
 import { BASE_URL } from "~/settings";
-import { HomePage } from "~/pages/HomePage/HomePage";
+import { PortfolioPage } from "~/pages/PortfolioPage/PortfolioPage";
 
 export function meta({ location }: Route.MetaArgs) {
   const lang =
@@ -15,6 +15,6 @@ export function meta({ location }: Route.MetaArgs) {
     { name: "description", content: portfolio.meta.description },
   ];
 }
-export default function Home() {
-  return <HomePage />;
+export default function Portfolio() {
+  return <PortfolioPage />;
 }
