@@ -1,0 +1,13 @@
+@use "../../styles/responsive" as *;
+
+@include responsive(fullscreen) {
+}
+
+@include responsive(screen) {
+}
+
+@include responsive(tablet) {
+}
+
+@include responsive(phone) {
+}

@@ -1,0 +1,23 @@
+@use "../../styles/responsive" as *;
+
+// ─────────────────────────────────────────
+// Desktop Header
+// ─────────────────────────────────────────
+.header {
+  position: relative;
+  z-index: 100;
+  max-width: 1820px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  box-sizing: border-box;
+  padding: 20px;
+  padding-top: 104px;
+
+  @include responsive(screen) {
+    padding-top: 20px;
+  }
+}

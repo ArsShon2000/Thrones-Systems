@@ -1,7 +1,7 @@
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/services";
 import { content_ru } from "../constants/content_ru";
 import { BASE_URL } from "~/settings";
-import { HomePage } from "~/pages/HomePage/HomePage";
+import { ServicesPage } from "~/pages/ServicesPage/ServicesPage";
 
 export function meta({ location }: Route.MetaArgs) {
   const lang =
@@ -9,12 +9,13 @@ export function meta({ location }: Route.MetaArgs) {
       ? "ru"
       : "ru";
   const { pages } = lang === "ru" ? content_ru : content_ru;
-  const { portfolio } = pages;
+  const { services } = pages;
   return [
-    { title: portfolio.meta.title },
-    { name: "description", content: portfolio.meta.description },
+    { title: services.meta.title },
+    { name: "description", content: services.meta.description },
   ];
 }
-export default function Home() {
-  return <HomePage />;
+
+export default function Services() {
+  return <ServicesPage />;
 }

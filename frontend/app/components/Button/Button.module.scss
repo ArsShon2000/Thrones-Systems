@@ -1,0 +1,45 @@
+.button {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 14px 32px;
+  border-radius: 114px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  color: var(--cl-text);
+  white-space: nowrap;
+}
+
+.red {
+  // Primary variant styles
+  background-color: var(--cl-main);
+  box-shadow: 0 10px 42.3px 0 var(--cl-main);
+  border: 2px solid transparent;
+}
+
+.white {
+  background-color: var(--cl-white);
+  border: 2px solid transparent;
+  color: var(--cl-black-2);
+}
+
+.black {
+  border: 1px solid var(--cl-grey-3);
+  backdrop-filter: blur(25px);
+  background-color: var(--cl-grey-1);
+}
+
+@media (hover: hover) {
+  .red:hover:not(:disabled) {
+    border: 2px solid var(--cl-white);
+  }
+  .white:hover:not(:disabled) {
+    border: 2px solid var(--cl-main);
+    color: var(--cl-main);
+  }
+
+  .black:hover:not(:disabled) {
+  }
+}
