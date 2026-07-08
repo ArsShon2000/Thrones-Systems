@@ -9,10 +9,10 @@ export function meta({ location }: Route.MetaArgs) {
       ? "ru"
       : "ru";
   const { pages } = lang === "ru" ? content_ru : content_ru;
-  const { portfolio } = pages;
+  const { home } = pages;
   return [
-    { title: portfolio.meta.title },
-    { name: "description", content: portfolio.meta.description },
+    { title: home.meta.title },
+    { name: "description", content: home.meta.description },
   ];
 }
 export default function Home() {

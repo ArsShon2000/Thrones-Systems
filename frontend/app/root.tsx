@@ -3,6 +3,7 @@ import {
   Links,
   Meta,
   Outlet,
+  useLocation,
   Scripts,
   ScrollRestoration,
 } from "react-router";
@@ -48,9 +49,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+  const isHomePage = pathname === "/";
+
   return (
     <div className="appWrapper">
-      <Header />
+      {!isHomePage && <Header />}
       <Outlet />
       <Footer />
     </div>
