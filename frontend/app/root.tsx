@@ -1,12 +1,13 @@
+import { AnimatePresence } from "framer-motion";
 import {
   isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
-  useLocation,
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { BASE_URL } from "./settings";
 
 import type { Route } from "./+types/root";
 import "./styles/reset.scss";
@@ -16,6 +17,8 @@ import "./styles/responsive.scss";
 
 import { Header } from "./components/Header/Header";
 import { Footer } from "./components/Footer/Footer";
+import { ModalForm } from "./components/ModalForm/ModalForm";
+import { ContactModalProvider, useContactModal } from "./hooks/useContactModal";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -31,11 +34,35 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const siteUrl = BASE_URL;
+
   return (
-    <html lang="en">
+    <html lang="ru">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="ARTA — студия веб-разработки и digital-решений: сайты, CRM/ERP, высоконагруженные платформы и автоматизация бизнеса."
+        />
+        <meta name="theme-color" content="#0f0f0f" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="ARTA" />
+        <meta property="og:title" content="ARTA — веб-разработка и digital-решения" />
+        <meta
+          property="og:description"
+          content="Создаём современные сайты, корпоративные платформы и CRM/ERP-системы под задачи бизнеса."
+        />
+        <meta property="og:url" content={siteUrl} />
+        <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ARTA — веб-разработка и digital-решения" />
+        <meta
+          name="twitter:description"
+          content="Сайты, CRM/ERP, highload и digital-решения под ключ."
+        />
+        <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+        <link rel="canonical" href={siteUrl} />
         <Meta />
         <Links />
       </head>
@@ -48,16 +75,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
-  const { pathname } = useLocation();
-  const isHomePage = pathname === "/";
+function AppContent() {
+  const { isOpen, closeModal } = useContactModal();
 
   return (
     <div className="appWrapper">
-      {!isHomePage && <Header />}
-      <Outlet />
+      <Header />
+      <AnimatePresence mode="wait" initial={false}>
+        <Outlet />
+      </AnimatePresence>
       <Footer />
+      <ModalForm isOpen={isOpen} onClose={closeModal} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ContactModalProvider>
+      <AppContent />
+    </ContactModalProvider>
   );
 }
 

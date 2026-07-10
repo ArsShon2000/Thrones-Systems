@@ -2,7 +2,6 @@
 
 .page {
   width: 100%;
-  background: #ffffff;
 }
 
 .hero {
@@ -10,13 +9,7 @@
   width: 100%;
   min-height: 100dvh;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    #111111 0%,
-    #1b1b1b 38%,
-    #efefef 72%,
-    #ffffff 100%
-  );
+  background: linear-gradient(180deg, #111111 0%, #1b1b1b 38%, #efefef 72%, #ffffff 100%);
 }
 
 .background {
@@ -93,29 +86,17 @@
 .statsSection {
   position: relative;
   background: #ffffff;
-  padding:
-    36px
-    clamp(24px, 8.5vw, 163px)
-    clamp(64px, 10vw, 120px);
-}
-
-.statsSection::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: clamp(24px, 8.5vw, 163px);
-  right: clamp(24px, 8.5vw, 163px);
-  height: 1px;
-  background: rgba(0, 0, 0, 0.14);
+  padding-top: 107px;
 }
 
 .stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(24px, 8vw, 140px);
+  display: flex;
+  justify-content: space-around;
   align-items: start;
-  max-width: 1640px;
+  padding: 0 20px;
+  max-width: 1680px;
   margin: 0 auto;
+  gap: 20px;
 }
 
 .stat {
@@ -128,7 +109,7 @@
 
 .statValue {
   font-family: "Zen Dots Cyrillic", cursive;
-  font-size: clamp(3.2rem, 4.8vw, 5.2rem);
+  font-size: 84px;
   font-weight: 400;
   line-height: 0.92;
   letter-spacing: -0.06em;
@@ -138,7 +119,7 @@
   margin: 20px 0 0;
   max-width: 14ch;
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.98rem, 1.35vw, 1.3rem);
+  font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0.14em;
@@ -147,16 +128,18 @@
 }
 
 .about {
-  max-width: 1640px;
-  margin: clamp(108px, 14vw, 168px) auto 0;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-top: 140px;
+  padding-bottom: 97px;
 }
 
 .aboutTitle {
   margin: 0;
   font-family: "Zen Dots Cyrillic", cursive;
-  font-size: 56px;
   font-weight: 400;
-  line-height: 1.02;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #111111;
@@ -164,7 +147,7 @@
 
 .aboutText {
   max-width: 1040px;
-  margin: clamp(46px, 5.2vw, 72px) 0 0;
+  margin-top: 85px;
   font-family: "Montserrat", sans-serif;
   font-size: 24px;
   font-weight: 400;
@@ -188,82 +171,77 @@
 .featuresSection {
   position: relative;
   background: #ffffff;
-  padding:
-    34px
-    clamp(24px, 4.5vw, 88px)
-    clamp(72px, 8vw, 128px);
-}
-
-.featuresSection::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.14);
 }
 
 .featuresShell {
   position: relative;
-  min-height: 650px;
-  max-width: 1760px;
+  max-width: 1440px;
   margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 80px;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: center;
 }
 
-.featuresRail {
+.featureCardCol {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.lineWrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 70px;
+}
+
+.lineWrapperMobile {
+  display: none;
+}
+
+.line {
   position: absolute;
-  top: 24px;
-  bottom: 24px;
+  top: 0;
   left: 50%;
-  width: 1px;
   transform: translateX(-50%);
-  background: rgba(20, 20, 20, 0.8);
+  width: 1px;
+  background: var(--cl-black);
+  height: 100%;
+  display: block;
 }
-
 .featureMarker {
-  position: absolute;
-  left: 50%;
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 44px;
+  box-sizing: content-box;
+  position: relative;
+  z-index: 10;
   height: 44px;
   border-radius: 50%;
   background: #b9e919;
-  transform: translateX(-50%);
   font-family: "Montserrat", sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.2;
+  border: 16px solid var(--cl-white);
   color: rgba(21, 21, 21, 0.7);
 }
 
-.featureMarker1 {
-  top: 118px;
-}
-
-.featureMarker2 {
-  top: 344px;
-}
-
-.featureMarker3 {
-  top: 570px;
-}
-
 .featureCard {
-  position: absolute;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
   box-sizing: border-box;
+  height: max-content;
   padding: 48px;
-  width: min(640px, calc(50% - 80px));
-  height: 210px;
-  overflow: hidden;
   border: 3px solid #b9e919;
   border-radius: 2px;
   background: rgba(242, 242, 242, 0.92);
@@ -271,33 +249,12 @@
   -webkit-backdrop-filter: blur(15px);
 }
 
-.featureCardLeft {
-  right: calc(50% + 80px);
-  top: 238px;
-}
-
-.featureCardRight {
-  left: calc(50% + 80px);
-}
-
-.featureCardTop {
-  top: 0;
-}
-
-.featureCardCenter {
-  top: 238px;
-}
-
-.featureCardBottom {
-  bottom: 0;
-}
-
 .featureTitle {
   margin: 0;
   font-family: "Zen Dots Cyrillic", cursive;
-  font-size: clamp(1.5rem, 2.2vw, 2.75rem);
+  font-size: 24px;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #151515;
@@ -308,35 +265,38 @@
   max-width: 100%;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: rgba(21, 21, 21, 0.55);
 }
 
+.servicesBg {
+  background: url("../../assets/images/home_services_bg.png") no-repeat center;
+  background-size: 100% 100%;
+  background-color: #ffffff;
+}
+
 .showcaseSection {
   position: relative;
   overflow: hidden;
-  background: #ffffff;
-  padding:
-    clamp(48px, 4.5vw, 72px)
-    0
-    clamp(56px, 6vw, 96px);
+
+  background-color: transparent;
+
+  padding: 72px 0 96px;
 }
 
 .showcaseInner {
-  max-width: 1643px;
+  max-width: 1680px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 8.5vw, 163px);
+  padding: 0 20px;
 }
-
 .showcaseTitle {
-  margin: 0 0 clamp(28px, 4vw, 48px);
+  margin: 0 0 48px;
   font-family: "Zen Dots Cyrillic", cursive;
-  font-size: 64px;
   font-weight: 400;
-  line-height: 0.98;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #121212;
@@ -353,12 +313,7 @@
 
 .productsSection {
   position: relative;
-  overflow: hidden;
-  background: #151515;
-  padding:
-    clamp(52px, 5vw, 88px)
-    clamp(24px, 8.5vw, 163px)
-    clamp(72px, 7vw, 112px);
+  padding-top: 600px;
 }
 
 .productsInner {
@@ -383,12 +338,9 @@
 
 .productsTitle {
   margin: 0;
-  width: min(100%, 760px);
-  max-width: 760px;
   font-family: "Zen Dots Cyrillic", cursive;
   font-size: 64px;
   font-weight: 400;
-  line-height: 0.94;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #ffffff;
@@ -405,32 +357,11 @@
   color: var(--Neutral-0, #ffffff);
 }
 
-.productsVector {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(-20px, -1vw, 0px);
-  width: 100vw;
-  max-width: 100vw;
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  opacity: 0.95;
-  transform: translateX(-50%);
-}
-
 .servicesSection {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 4% 10%, rgba(185, 233, 25, 0.1), transparent 18%),
-    radial-gradient(circle at 96% 14%, rgba(185, 233, 25, 0.08), transparent 16%),
-    #151515;
-  padding:
-    clamp(40px, 4.5vw, 72px)
-    clamp(24px, 8.5vw, 163px)
-    clamp(72px, 8vw, 120px);
+  background: transparent;
+  padding: 72px 163px 120px;
 }
 
 .servicesInner {
@@ -439,7 +370,7 @@
 }
 
 .servicesTitle {
-  margin: 0 0 clamp(28px, 32px, 45px);
+  margin: 0 0 32px;
   font-family: "Zen Dots Cyrillic", cursive;
   font-size: 28px;
   font-weight: 400;
@@ -452,7 +383,7 @@
 .servicesGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(28px, 5vw, 96px);
+  gap: 96px;
   align-items: start;
 }
 
@@ -473,7 +404,8 @@
 }
 
 .serviceTitle {
-  margin: 24px 0 0;
+  margin-top: 35px;
+  margin-bottom: 20px;
   font-family: "Zen Dots Cyrillic", cursive;
   font-size: 24px;
   font-weight: 400;
@@ -484,8 +416,6 @@
 }
 
 .serviceText {
-  max-width: 24ch;
-  margin: 18px 0 0;
   font-family: "Montserrat", sans-serif;
   font-size: 24px;
   font-weight: 400;
@@ -498,10 +428,7 @@
   position: relative;
   overflow: hidden;
   background: #151515;
-  padding:
-    clamp(72px, 6vw, 120px)
-    clamp(24px, 8.5vw, 163px)
-    clamp(72px, 6vw, 120px);
+  padding: 120px 163px;
 }
 
 .caseStudyInner {
@@ -519,7 +446,7 @@
   display: grid;
   grid-template-columns: 100px 280px minmax(0, 1fr);
   align-items: center;
-  gap: clamp(32px, 4vw, 96px);
+  gap: 96px;
   padding: 40px 0 50px;
 }
 
@@ -573,24 +500,35 @@
 .marqueeSection {
   position: relative;
   overflow: hidden;
-  background: #ffffff;
-  padding:
-    clamp(44px, 4vw, 64px)
-    0
-    clamp(46px, 5vw, 72px);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: transparent;
+  padding-top: 193px;
+  padding-bottom: 94px;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 .marqueeInner {
   max-width: 1643px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 6vw, 160px);
+  padding: 0 160px;
+  box-sizing: border-box;
 }
 
 .marqueeRow {
   height: 100px;
-  overflow: hidden;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
+  background-image: url("../../assets/images/marquee_item.png");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  animation: marqueeBg 20s linear infinite;
+}
+
+.marqueeRowReverse {
+  animation-direction: reverse;
+  animation-duration: 28s;
 }
 
 .marqueeTop {
@@ -598,27 +536,7 @@
 }
 
 .marqueeBottom {
-  margin-bottom: clamp(54px, 8vw, 92px);
-}
-
-.marqueeTrack {
-  display: flex;
-  width: max-content;
-  height: 100%;
-  will-change: transform;
-  animation: marqueeShift 26s linear infinite;
-}
-
-.marqueeTrackReverse {
-  animation-direction: reverse;
-  animation-duration: 34s;
-}
-
-.marqueeImage {
-  display: block;
-  flex: none;
-  height: 100%;
-  width: auto;
+  margin-bottom: 92px;
 }
 
 .marqueeContent {
@@ -652,20 +570,28 @@
   font-weight: 600;
   line-height: normal;
   letter-spacing: 1.2px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--cl-main);
+      border-color: var(--cl-main);
+    }
+  }
 }
 
-@keyframes marqueeShift {
+@keyframes marqueeBg {
   from {
-    transform: translateX(0);
+    background-position: 0 center;
   }
-
   to {
-    transform: translateX(-50%);
+    background-position: -2000px center;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marqueeTrack {
+  .marqueeRow {
     animation: none;
   }
 }
@@ -673,31 +599,20 @@
 .industriesSection {
   position: relative;
   background: #ffffff;
-  padding:
-    clamp(48px, 4vw, 72px)
-    0
-    clamp(72px, 8vw, 128px);
-}
-
-.industriesInner {
-  max-width: 1643px;
+  padding: 0;
+  max-width: 1648px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 8.5vw, 163px);
+  padding: 0 20px;
+  padding-top: 173px;
 }
 
 .industriesHeader {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
+  position: relative;
 }
 
 .industriesTitle {
   margin: 0;
-  width: min(100%, 760px);
-  max-width: 960px;
   font-family: "Zen Dots Cyrillic", cursive;
-  font-size: 64px;
   font-weight: 400;
   line-height: 0.94;
   letter-spacing: -0.03em;
@@ -722,6 +637,20 @@
   letter-spacing: -0.44px;
   text-transform: uppercase;
   color: #121212;
+  width: 436px;
+  display: block;
+  position: absolute;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cl-black-2);
+  right: 0;
+  bottom: -20px;
+}
+
+.industriesContentHeader {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: start;
+  gap: 80px;
 }
 
 .industriesDivider {
@@ -736,6 +665,9 @@
   display: grid;
   grid-template-columns: 28% 72%;
   min-height: 860px;
+  margin-top: 60px;
+
+  border-top: 1px solid rgba(18, 18, 18, 0.14);
 }
 
 .industriesBody::before {
@@ -754,12 +686,11 @@
 
 .industriesContent {
   position: relative;
-  padding: 52px 0 0 clamp(56px, 5vw, 112px);
+  padding: 52px 0 0 112px;
 }
 
 .industriesEyebrow {
   display: block;
-  margin: 0 0 18px;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -770,36 +701,39 @@
 }
 
 .industriesSubtitle {
-  margin: 0 42px 42px;
-  max-width: 19ch;
   font-family: "Montserrat", sans-serif;
   font-size: 44px;
   font-weight: 500;
   line-height: 56px;
+  white-space: pre-wrap;
   letter-spacing: -0.44px;
   color: var(--Neutral-100, #121212);
 }
 
 .industriesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 524px));
-  justify-content: start;
-  column-gap: clamp(40px, 4vw, 84px);
-  row-gap: 56px;
+  display: flex;
+
+  margin-top: 80px;
+}
+.industriesGridCol {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+}
+.industriesGridCol:first-child {
+  padding-right: 35px;
+  border-right: 1px solid rgba(18, 18, 18, 0.12);
+}
+
+.industriesGridCol:last-child {
+  padding-top: 140px;
+  padding-left: 35px;
 }
 
 .industryCard {
   display: flex;
   flex-direction: column;
   width: min(524px, 100%);
-}
-
-.industryCardLeft {
-  transform: translateY(-18px);
-}
-
-.industryCardRight {
-  transform: translateY(34px);
 }
 
 .industryCardHeader {
@@ -846,29 +780,33 @@
 }
 
 @include responsive(fullscreen) {
+  .statValue {
+    font-size: 76px;
+  }
+
   .title {
     top: 22vh;
-    left: clamp(64px, 10vw, 163px);
-    font-size: clamp(120px, 10vw, 200px);
+    left: 120px;
+    font-size: 160px;
   }
 
   .subtitle {
-    top: clamp(560px, 52vh, 639px);
-    left: clamp(64px, 10vw, 163px);
+    top: 560px;
+    left: 120px;
     width: min(100%, 920px);
-    font-size: clamp(24px, 1.8vw, 32px);
+    font-size: 28px;
   }
 
   .button {
-    right: clamp(64px, 9vw, 188px);
-    bottom: clamp(24px, 2vw, 39px);
-    width: clamp(112px, 8vw, 160px);
-    height: clamp(112px, 8vw, 160px);
+    right: 120px;
+    bottom: 32px;
+    width: 148px;
+    height: 148px;
   }
 
   .buttonIcon {
-    width: clamp(46px, 3vw, 48px);
-    height: clamp(46px, 3vw, 48px);
+    width: 48px;
+    height: 48px;
   }
   .featureCard {
     height: 200px;
@@ -881,9 +819,9 @@
   }
 
   .featureText {
-    font-size: 1rem;
-    line-height: 1.45;
- }
+    font-size: 18px;
+    line-height: 1.5;
+  }
 
   .featureMarker {
     width: 40px;
@@ -891,22 +829,18 @@
     font-size: 0.85rem;
   }
 
-  .showcaseTitle {
-    font-size: clamp(4rem, 5vw, 64px);
-  }
-
   .productsTitle {
-    font-size: clamp(4rem, 5vw, 64px);
+    font-size: 64px;
   }
 
   .productsText {
     margin-top: 36px;
-    font-size: clamp(2rem, 3.4vw, 44px);
+    font-size: 40px;
     line-height: 1.25;
   }
 
   .servicesTitle {
-    font-size: clamp(18px, 28px, 32px);
+    font-size: 28px;
   }
 
   .servicesGrid {
@@ -922,29 +856,30 @@
     line-height: 1.35;
   }
 
-  .industriesTitle {
-    font-size: clamp(4rem, 5vw, 64px);
+  .industriesSubtitle {
+    font-size: 44px;
   }
 
-  .industriesSubtitle {
-    font-size: clamp(2.25rem, 3.6vw, 44px);
+  .industriesProjectsLabel {
+    position: relative;
+    width: max-content;
   }
 
   .industriesGrid {
-    column-gap: clamp(36px, 4vw, 72px);
+    column-gap: 64px;
     row-gap: 48px;
-  }
-
-  .industryCardLeft {
-    transform: translateY(-12px);
-  }
-
-  .industryCardRight {
-    transform: translateY(28px);
   }
 }
 
 @include responsive(screen) {
+  .stats {
+    gap: 32px;
+  }
+
+  .statValue {
+    font-size: 60px;
+  }
+
   .title {
     top: 160px;
     left: 80px;
@@ -972,25 +907,23 @@
 
   .aboutTitle {
     max-width: none;
-    font-size: 56px;
   }
 
- .featureCard {
-    width: min(520px, calc(50% - 64px));
+  .featureCard {
     height: auto;
     min-height: 184px;
     padding: 32px;
     gap: 14px;
- }
+  }
 
- .featureTitle {
+  .featureTitle {
     font-size: 1.7rem;
- }
+  }
 
- .featureText {
-    font-size: 0.92rem;
-    line-height: 1.4;
- }
+  .featureText {
+    max-width: none;
+    font-size: 18px;
+  }
 
   .featureMarker {
     width: 38px;
@@ -998,12 +931,8 @@
     font-size: 0.8rem;
   }
 
-  .showcaseTitle {
-    font-size: clamp(3rem, 4.8vw, 56px);
-  }
-
   .productsTitle {
-    font-size: clamp(3.2rem, 4.8vw, 56px);
+    font-size: 48px;
   }
 
   .productsText {
@@ -1013,7 +942,7 @@
   }
 
   .servicesTitle {
-    font-size: clamp(20px, 28px, 56px);
+    font-size: 24px;
   }
 
   .servicesGrid {
@@ -1032,10 +961,6 @@
 
   .industriesHeader {
     align-items: flex-start;
-  }
-
-  .industriesTitle {
-    font-size: clamp(3.2rem, 4.8vw, 56px);
   }
 
   .industriesProjects {
@@ -1081,15 +1006,12 @@
   }
 
   .caseStudySection {
-    padding:
-      64px
-      clamp(24px, 8.5vw, 163px)
-      72px;
+    padding: 64px 80px 72px;
   }
 
   .caseStudyRow {
     grid-template-columns: 84px 220px minmax(0, 1fr);
-    gap: 40px;
+    gap: 48px;
     padding: 32px 0 40px;
   }
 
@@ -1106,9 +1028,50 @@
   .caseStudyText {
     line-height: 1.4;
   }
+
+  .featuresSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 0 auto;
+  }
+  .featureCardCol {
+    flex-direction: column;
+    gap: 20px;
+    max-width: fit-content;
+  }
+  .featureCard {
+    width: 100%;
+  }
+  .featuresShell {
+    display: flex;
+    align-items: start;
+    width: max-content;
+    margin: 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .lineWrapperPC {
+    display: none;
+  }
+  .lineWrapperMobile {
+    display: flex;
+  }
 }
 
 @include responsive(tablet) {
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .statValue {
+    font-size: 48px;
+  }
+
   .title {
     top: 118px;
     left: 40px;
@@ -1117,7 +1080,6 @@
 
   .aboutTitle {
     max-width: none;
-    font-size: 40px;
   }
 
   .subtitle {
@@ -1140,91 +1102,24 @@
     height: 36px;
   }
 
-  .showcaseTitle {
-    font-size: 40px;
-  }
-
   .featuresSection {
-  padding:
-    28px
-    16px
-    64px;
- }
+    padding: 28px 16px 64px;
+  }
 
- .featuresShell {
+  .featuresShell {
     min-height: 640px;
- }
-
-
- 
- .featureCard {
-    width: min(360px, calc(50% - 48px));
-    height: auto;
-    min-height: 172px;
-    padding: 38px;
-    gap: 16px;
   }
 
-  .featureCardLeft {
-    right: calc(50% + 48px);
-    top: 196px;
- }
-
-  .featureCardRight {
-    left: calc(50% + 48px);
- }
-
- .featureCardCenter {
-    top: 196px;
- }
-
-  .featureTitle {
-   font-size: 1.35rem;
- }
-
-  .featureText {
-    max-width: none;
-    font-size: 0.92rem;
-    line-height: 1.45;
- }
-
-  .featureCard {
-    width: min(420px, calc(50% - 40px));
-    height: auto;
-    min-height: 168px;
-    padding: 28px;
-    gap: 12px;
- }
-
-  .featureTitle {
-    font-size: 1.45rem;
- }
-
-  .featureText {
-    font-size: 0.88rem;
-    line-height: 1.35;
- }
-
-  .productsTitle {
-    font-size: 40px;
+  .caseStudyRow {
+    gap: 32px;
   }
 
-  .productsText {
-    font-size: 28px;
+  .marqueeBottom {
+    margin-bottom: 48px;
   }
 
-  .industriesTitle {
-    font-size: 40px;
-  }
-
-  .industriesSubtitle {
-    font-size: 28px;
-  }
-}
-
-@include responsive(phone) {
-  .hero {
-    min-height: 100vh;
+  .industriesContent {
+    padding: 28px 0 0 28px;
   }
 
   .title {
@@ -1254,20 +1149,13 @@
   }
 
   .statsSection {
-    padding:
-      28px
-      20px
-      64px;
-  }
-
-  .statsSection::before {
-    left: 20px;
-    right: 20px;
+    padding: 28px 20px 64px;
   }
 
   .stats {
     grid-template-columns: 1fr;
     gap: 32px;
+    padding: 0;
   }
 
   .statValue {
@@ -1281,12 +1169,13 @@
   }
 
   .about {
-    margin-top: 68px;
+    margin-top: 0;
+    padding: 0;
+    padding-top: 70px;
   }
 
   .aboutTitle {
     max-width: none;
-    font-size: 32px;
   }
 
   .aboutText {
@@ -1296,23 +1185,14 @@
   }
 
   .featuresSection {
-    padding:
-      28px
-      20px
-      64px;
+    padding: 28px 20px 64px;
   }
 
-  .featuresShell {
-    min-height: auto;
-    display: grid;
-    gap: 20px;
-  }
-
-  .featuresSection::before,
-  .featuresRail,
-  .featureMarker {
-    display: none;
-  }
+  // .featuresSection::before,
+  // .featuresRail,
+  // .featureMarker {
+  //   display: none;
+  // }
 
   .featureCard {
     position: relative;
@@ -1325,23 +1205,19 @@
     height: auto;
     padding: 24px;
     gap: 14px;
- }
+  }
 
   .featureTitle {
     font-size: 1.45rem;
- }
+  }
 
   .featureText {
     max-width: none;
-    font-size: 0.95rem;
-    line-height: 1.45;
- }
+    font-size: 18px;
+  }
 
   .showcaseSection {
-    padding:
-      28px
-      0
-      64px;
+    padding: 28px 0 64px;
   }
 
   .showcaseInner {
@@ -1350,7 +1226,6 @@
 
   .showcaseTitle {
     margin-bottom: 20px;
-    font-size: 2.25rem;
     line-height: 1.04;
   }
 
@@ -1359,10 +1234,7 @@
   }
 
   .productsSection {
-    padding:
-      28px
-      20px
-      64px;
+    padding: 28px 20px 64px;
   }
 
   .productsTitle {
@@ -1398,10 +1270,7 @@
   }
 
   .servicesSection {
-    padding:
-      28px
-      20px
-      64px;
+    padding: 28px 20px 64px;
   }
 
   .servicesTitle {
@@ -1431,10 +1300,7 @@
   }
 
   .marqueeSection {
-    padding:
-      32px
-      0
-      48px;
+    padding: 32px 0 48px;
   }
 
   .marqueeInner {
@@ -1470,10 +1336,7 @@
   }
 
   .industriesSection {
-    padding:
-      28px
-      0
-      64px;
+    padding: 28px 0 64px;
   }
 
   .industriesInner {
@@ -1488,7 +1351,6 @@
 
   .industriesTitle {
     max-width: none;
-    font-size: 2.25rem;
   }
 
   .industriesProjects {
@@ -1505,7 +1367,7 @@
   }
 
   .industriesContent {
-    padding-top: 28px;
+    padding: 28px 0 0 0;
   }
 
   .industriesEyebrow {
@@ -1519,7 +1381,18 @@
   }
 
   .industriesGrid {
+    flex-direction: column;
     gap: 24px;
+  }
+
+  .industriesGridCol {
+    gap: 24px;
+  }
+
+  .industriesGridCol:first-child,
+  .industriesGridCol:last-child {
+    padding: 0;
+    border: 0;
   }
 
   .industryCardLeft,
@@ -1537,15 +1410,12 @@
   }
 
   .caseStudySection {
-    padding:
-      56px
-      20px
-      64px;
+    padding: 56px 20px 64px;
   }
 
   .caseStudyRow {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 24px;
     padding: 24px 0 28px;
   }
 
@@ -1561,5 +1431,247 @@
 
   .caseStudyText {
     line-height: 1.5;
+  }
+
+  .marqueeBottom {
+    margin-bottom: 40px;
+  }
+
+  .showcaseSection {
+    padding: 28px 0 48px;
+  }
+
+  .showcaseTitle {
+    margin-bottom: 20px;
+  }
+
+  .servicesSection {
+    padding: 28px 20px 56px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .marqueeInner {
+    padding: 0 20px;
+  }
+
+  .industriesSubtitle {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+}
+
+@include responsive(phone) {
+  .page {
+    overflow-x: hidden;
+    min-width: 320px;
+  }
+
+  .statsSection {
+    padding: 24px 16px 48px;
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 0;
+  }
+
+  .statValue {
+    font-size: 2.4rem;
+  }
+
+  .statLabel {
+    margin-top: 10px;
+    max-width: 18ch;
+    font-size: 0.78rem;
+  }
+
+  .about {
+    padding: 56px 0 0;
+  }
+
+  .aboutTitle {
+    line-height: 1.1;
+  }
+
+  .aboutText {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .featuresSection {
+    padding: 0 16px 48px;
+  }
+
+  .featuresShell {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .featureCard {
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    padding: 20px 18px;
+    gap: 12px;
+    border-width: 2px;
+  }
+
+  .featureTitle {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .featureText {
+    max-width: none;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .lineWrapper,
+  .lineWrapperPC,
+  .lineWrapperMobile {
+    display: none;
+  }
+
+  .showcaseSection {
+    padding: 20px 0 48px;
+  }
+
+  .showcaseInner {
+    padding: 0 16px;
+  }
+
+  .showcaseTitle {
+    margin-bottom: 16px;
+    font-size: 1.75rem;
+    line-height: 1.08;
+  }
+
+  .servicesSection {
+    padding: 24px 16px 48px;
+  }
+
+  .servicesTitle {
+    margin-bottom: 18px;
+    font-size: 1.2rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .serviceTitle {
+    margin-top: 16px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .serviceText {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .marqueeSection {
+    padding: 28px 0 40px;
+  }
+
+  .marqueeInner {
+    padding: 0 16px;
+  }
+
+  .marqueeRow {
+    height: 56px;
+  }
+
+  .marqueeText {
+    width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .marqueeCta {
+    margin-top: 18px;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+
+  .industriesSection {
+    padding: 24px 16px 48px;
+  }
+
+  .industriesHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .industriesTitle {
+    font-size: 1.75rem;
+    line-height: 1.05;
+  }
+
+  .industriesProjectsLabel {
+    position: static;
+    width: 100%;
+    font-size: 0.95rem;
+    padding-bottom: 8px;
+  }
+
+  .industriesBody {
+    margin-top: 28px;
+    grid-template-columns: 1fr;
+  }
+
+  .industriesContent {
+    padding: 20px 0 0;
+  }
+
+  .industriesContentHeader {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .industriesSubtitle {
+    margin-bottom: 20px;
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .industriesGrid {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .industriesGridCol {
+    gap: 20px;
+  }
+
+  .industriesGridCol:first-child,
+  .industriesGridCol:last-child {
+    padding: 0;
+    border: 0;
+  }
+
+  .industryCardTitle {
+    font-size: 1.1rem;
+  }
+
+  .industryCardText {
+    font-size: 0.9rem;
+    line-height: 1.45;
   }
 }
