@@ -8,7 +8,9 @@
   --cl-black: #000;
   --cl-black-2: #121212;
   --cl-main: #b9e919;
+  --cl-main-dark: #a2ce14;
   --cl-gray-60: rgba(0, 0, 0, 0.6);
+  --cl-gray-80: #414141;
 }
 
 * {
@@ -31,9 +33,32 @@ a {
 
 .appWrapper {
   min-height: 100vh;
-  overflow-x: clip;
-  background:
-    radial-gradient(circle at 18% 12%, rgba(202, 255, 51, 0.14), transparent 28rem),
-    radial-gradient(circle at 78% 4%, rgba(255, 215, 0, 0.1), transparent 24rem),
-    linear-gradient(180deg, #0b100c 0%, #070907 42%, #0f120d 100%);
+}
+
+h2 {
+  margin: 0;
+  font-family: "Zen Dots Cyrillic", cursive;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--cl-white);
+  line-height: 1.2;
+}
+
+@include responsive(fullscreen) {
+  h2 {
+    font-size: 52px;
+  }
+}
+@include responsive(tablet) {
+  h2 {
+    font-size: 40px;
+  }
+}
+@include responsive(phone) {
+  h2 {
+    font-size: 26px;
+  }
 }

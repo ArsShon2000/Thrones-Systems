@@ -1,61 +1,25 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLang, type Lang } from "../../hooks/useLang";
+import { useLang } from "../../hooks/useLang";
 import styles from "./Header.module.scss";
 import { Button } from "../Button/Button";
-
-function ChevronIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <motion.svg
-      animate={{ rotate: isOpen ? 180 : 0 }}
-      transition={{ duration: 0.22 }}
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      className={styles.chevron}
-    >
-      <path
-        d="M2 4L6 8L10 4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </motion.svg>
-  );
-}
-
-const LANGS: { code: Lang; label: string }[] = [{ code: "ru", label: "Русский" }];
+import logo from "../../assets/icons/logo.svg";
+import { useContactModal } from "../../hooks/useContactModal";
 
 export function Header() {
-  const { lang, content, setLang, buildHref } = useLang();
+  const { content, buildHref } = useLang();
   const { components } = content;
-  const { nav, startConversation } = components.header;
+  const { nav, startConversation, ariaLabels } = components.header;
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
-
-  const langWrapperRef = useRef<HTMLDivElement>(null);
+  const { openModal } = useContactModal();
 
   const mainNavLinks = [
     { label: nav.home, path: "/" },
     { label: nav.portfolio, path: "/portfolio" },
     { label: nav.services, path: "/services" },
   ];
-
-  // Close dropdowns on outside click
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (langWrapperRef.current && !langWrapperRef.current.contains(e.target as Node)) {
-        setLangOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
 
   // Close mobile menu on resize
   useEffect(() => {
@@ -77,24 +41,28 @@ export function Header() {
   return (
     <>
       <header className={styles.header} role="banner">
-        <nav className={styles.nav} aria-label="Main navigation">
-          {mainNavLinks.map(({ label, path }) => (
-            <NavLink
-              key={path}
-              to={buildHref(path)}
-              className={({ isActive }) =>
-                [styles.link, isActive ? styles.activeLink : ""].filter(Boolean).join(" ")
-              }
-            >
-              {label}
-            </NavLink>
-          ))}
-        </nav>
+        <div className={styles.headerWrapper}>
+          <NavLink to="/">
+            <img alt="Logo" src={logo} className={styles.logo}></img>
+          </NavLink>
+          <nav className={styles.nav} aria-label="Main navigation">
+            {mainNavLinks.map(({ label, path }) => (
+              <NavLink
+                key={path}
+                to={buildHref(path)}
+                className={({ isActive }) =>
+                  [styles.link, isActive ? styles.activeLink : ""].filter(Boolean).join(" ")
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
 
-        {/* Right-side actions */}
-        <div className={styles.actions}>
-          {/* Language switcher dropdown */}
-          {/* <div
+          {/* Right-side actions */}
+          <div className={styles.actions}>
+            {/* Language switcher dropdown */}
+            {/* <div
             className={styles.langWrapper}
             ref={langWrapperRef}
             onMouseEnter={() => setLangOpen(true)}
@@ -114,7 +82,7 @@ export function Header() {
               <ChevronIcon isOpen={langOpen} />
             </button> */}
 
-          {/* <AnimatePresence>
+            {/* <AnimatePresence>
               {langOpen && (
                 <motion.div
                   className={styles.langDropdown}
@@ -165,37 +133,39 @@ export function Header() {
                 </motion.div>
               )}
             </AnimatePresence>*/}
-          {/* </div> */}
+            {/* </div> */}
 
-          <NavLink to={buildHref("/contact")} className={styles.ctaDesktop}>
-            <Button theme="white">{startConversation}</Button>
-          </NavLink>
-
-          {/* Burger button */}
-          <button
-            type="button"
-            className={styles.burger}
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-nav"
-          >
-            <motion.span
-              className={styles.burgerLine}
-              animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-            <motion.span
-              className={styles.burgerLine}
-              animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.span
-              className={styles.burgerLine}
-              animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-          </button>
+            <div className={styles.ctaDesktop}>
+              <Button theme="white" className={styles.ctaDesktop} type="button" onClick={openModal}>
+                {startConversation}
+              </Button>
+            </div>
+            {/* Burger button */}
+            <button
+              type="button"
+              className={styles.burger}
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? ariaLabels.closeMenu : ariaLabels.openMenu}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+            >
+              <motion.span
+                className={styles.burgerLine}
+                animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+              />
+              <motion.span
+                className={styles.burgerLine}
+                animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className={styles.burgerLine}
+                animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
+              />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -226,16 +196,15 @@ export function Header() {
             transition={{ type: "tween", duration: 0.33, ease: "easeInOut" }}
             role="dialog"
             aria-modal="true"
-            aria-label="Mobile navigation"
+            aria-label={ariaLabels.mobileNav}
           >
             {/* Mobile menu header row */}
             <div className={styles.mobileMenuTop}>
-              <span className={styles.mobileMenuTitle}>{nav.home}</span>
               <button
                 type="button"
                 className={styles.mobileClose}
                 onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
+                aria-label={ariaLabels.closeMenu}
               >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                   <path
@@ -249,35 +218,7 @@ export function Header() {
             </div>
 
             <nav className={styles.mobileNav}>
-              <NavLink
-                to={buildHref("/")}
-                className={({ isActive }) =>
-                  [styles.mobileLink, isActive ? styles.mobileLinkActive : ""]
-                    .filter(Boolean)
-                    .join(" ")
-                }
-                end
-                onClick={() => setMobileOpen(false)}
-              >
-                {nav.home}
-              </NavLink>
-
               {mainNavLinks.slice(0, 3).map(({ label, path }) => (
-                <NavLink
-                  key={path}
-                  to={buildHref(path)}
-                  className={({ isActive }) =>
-                    [styles.mobileLink, isActive ? styles.mobileLinkActive : ""]
-                      .filter(Boolean)
-                      .join(" ")
-                  }
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {label}
-                </NavLink>
-              ))}
-
-              {mainNavLinks.slice(3).map(({ label, path }) => (
                 <NavLink
                   key={path}
                   to={buildHref(path)}
@@ -335,13 +276,16 @@ export function Header() {
                   </button>
                 ))}
               </div> */}
-              <NavLink
-                to={buildHref("/contact")}
-                onClick={() => setMobileOpen(false)}
+              <Button
+                theme="white"
                 className={styles.mobileCta}
+                onClick={() => {
+                  setMobileOpen(false);
+                  openModal();
+                }}
               >
-                <Button theme="white">{startConversation}</Button>
-              </NavLink>
+                {startConversation}
+              </Button>
             </div>
           </motion.div>
         )}

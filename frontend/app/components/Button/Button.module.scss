@@ -1,45 +1,77 @@
+@use "../../styles/responsive.scss" as *;
+
 .button {
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  padding: 14px 32px;
-  border-radius: 114px;
-  background-color: transparent;
-  transition: all 0.3s ease;
-  color: var(--cl-text);
+  border-radius: 20px;
+  background: var(--cl-main);
   white-space: nowrap;
-}
-
-.red {
-  // Primary variant styles
-  background-color: var(--cl-main);
-  box-shadow: 0 10px 42.3px 0 var(--cl-main);
-  border: 2px solid transparent;
-}
-
-.white {
-  background-color: var(--cl-white);
-  border: 2px solid transparent;
-  color: var(--cl-black-2);
-}
-
-.black {
-  border: 1px solid var(--cl-grey-3);
-  backdrop-filter: blur(25px);
-  background-color: var(--cl-grey-1);
+  color: var(--cl-background);
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.6px;
+  padding: 12px 38px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  transition:
+    background 0.3s,
+    color 0.3s;
 }
 
 @media (hover: hover) {
-  .red:hover:not(:disabled) {
-    border: 2px solid var(--cl-white);
+  .button:hover {
+    background: var(--cl-main-dark);
+    color: var(--cl-background);
   }
-  .white:hover:not(:disabled) {
-    border: 2px solid var(--cl-main);
-    color: var(--cl-main);
+}
+
+.button.lg {
+  padding: 34px 100px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  gap: 45px;
+
+  svg {
+    width: 32px;
+  }
+}
+
+@include responsive(screen) {
+  .button.lg {
+    padding: 26px 72px;
+    font-size: 18px;
+  }
+}
+
+@include responsive(tablet) {
+  .button.lg {
+    padding: 20px 48px;
+    font-size: 16px;
+    gap: 24px;
+    border-radius: 40px;
   }
 
-  .black:hover:not(:disabled) {
+  .button.lg svg {
+    width: 24px;
+  }
+}
+
+@include responsive(phone) {
+  .button.lg {
+    padding: 16px 32px;
+    font-size: 14px;
+    gap: 16px;
+  }
+
+  .button.lg svg {
+    width: 20px;
   }
 }
