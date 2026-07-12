@@ -78,7 +78,7 @@ export function PortfolioPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -8, scale: 1.01 }}
+                whileHover={{ boxShadow: "0 18px 45px rgba(18, 18, 18, 0.24)" }}
               >
                 <div
                   className={`${styles.projectContent} ${i % 2 !== 0 && styles.projectContentText}`}

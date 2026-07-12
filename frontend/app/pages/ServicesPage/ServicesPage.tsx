@@ -2,26 +2,26 @@ import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useState } from "react";
 import { Intro } from "~/components/Intro/Intro";
+import { Modal } from "~/components/Modal/Modal";
 import { useLang } from "~/hooks/useLang";
 import styles from "./ServicesPage.module.scss";
 import services_1 from "../../assets/images/services_1.png";
 import services_2 from "../../assets/images/services_2.png";
 import services_3 from "../../assets/images/services_3.png";
 import services_4 from "../../assets/images/services_4.png";
+import services_5 from "../../assets/images/services_5.png";
 import { BottomSection } from "~/components/BottomSection/BottomSection";
 
-const SERVICE_IMAGES = [services_1, services_2, services_3, services_4];
+const SERVICE_IMAGES = [services_1, services_2, services_3, services_4, services_5];
 
 export function ServicesPage() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
-    containScroll: "trimSnaps",
     dragFree: false,
-    loop: false,
+    loop: true,
     slidesToScroll: 1,
   });
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null);
   const { content } = useLang();
   const servicesContent = content.pages.services.content;
   const frontendServices = servicesContent.cards.map((service, index) => ({
@@ -30,23 +30,13 @@ export function ServicesPage() {
     description: service.description,
     image: SERVICE_IMAGES[index],
   }));
+  const selectedService =
+    frontendServices.find((service) => service.id === selectedServiceId) ?? null;
 
   useEffect(() => {
     if (!emblaApi) return;
 
-    const updateButtons = () => {
-      setCanScrollPrev(emblaApi.canScrollPrev());
-      setCanScrollNext(emblaApi.canScrollNext());
-    };
-
-    updateButtons();
-    emblaApi.on("select", updateButtons);
-    emblaApi.on("reInit", updateButtons);
-
-    return () => {
-      emblaApi.off("select", updateButtons);
-      emblaApi.off("reInit", updateButtons);
-    };
+    emblaApi.reInit({ loop: true });
   }, [emblaApi]);
 
   return (
@@ -72,7 +62,6 @@ export function ServicesPage() {
                 className={styles.navBtn}
 
                 onClick={() => emblaApi?.scrollPrev()}
-                disabled={!canScrollPrev}
                 aria-label={servicesContent.section.navigation.prev}
               >
                 <svg
@@ -94,7 +83,6 @@ export function ServicesPage() {
               <button
                 className={styles.navBtn}
                 onClick={() => emblaApi?.scrollNext()}
-                disabled={!canScrollNext}
                 aria-label={servicesContent.section.navigation.next}
               >
                 <svg
@@ -123,27 +111,54 @@ export function ServicesPage() {
               role="list"
             >
               {frontendServices.map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  className={styles.serviceSlide}
-                  role="listitem"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -8, scale: 1.01 }}
-                >
-                  <div className={styles.serviceCard}>
+                <div key={service.id} className={styles.serviceSlide} role="listitem">
+                  <motion.button
+                    type="button"
+                    className={styles.serviceCard}
+                    onClick={() => setSelectedServiceId(service.id)}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.08,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    whileHover={{ y: -6, scale: 1.005 }}
+                  >
                     <img src={service.image} alt={service.title} className={styles.serviceImage} />
                     <h4 className={styles.serviceTitle}>{service.title}</h4>
                     <p className={styles.serviceDescription}>{service.description}</p>
-                  </div>
-                </motion.div>
+                  </motion.button>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </motion.section>
+
+      <Modal
+        isOpen={selectedService !== null}
+        onClose={() => setSelectedServiceId(null)}
+        size="lg"
+        showCloseButton={false}
+        className={styles.serviceModal}
+        contentClassName={styles.serviceModalContent}
+      >
+        {selectedService ? (
+          <>
+            <img
+              src={selectedService.image}
+              alt={selectedService.title}
+              className={styles.serviceModalImage}
+            />
+            <div className={styles.serviceModalText}>
+              <h2 className={styles.serviceModalTitle}>{selectedService.title}</h2>
+              <p className={styles.serviceModalDescription}>{selectedService.description}</p>
+            </div>
+          </>
+        ) : null}
+      </Modal>
 
       <BottomSection
         title={servicesContent.backendSection.title}
